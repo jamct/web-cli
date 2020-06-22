@@ -2,8 +2,9 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/spf13/cobra"
 	"os"
+
+	"github.com/spf13/cobra"
 )
 
 var rootCmd = &cobra.Command{
@@ -25,7 +26,7 @@ var cmdLs = &cobra.Command{
 var cmdDescribe = &cobra.Command{
 	Use:   "describe [id]",
 	Short: "Show details for an article",
-	Long:  `tesr`,
+	Long:  `Show details for an article`,
 	Args:  cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		describe(args[0])
