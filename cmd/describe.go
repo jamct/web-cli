@@ -3,24 +3,23 @@ package cmd
 import (
 	"fmt"
 	"time"
-
-	"github.com/mmcdole/gofeed"
 )
 
 func describe(id string) {
-	fp := gofeed.NewParser()
-	feed, _ := fp.ParseURL("https://www.heise.de/rss/heise-atom.xml")
 
-	for _, element := range feed.Items {
-		if element.GUID == id {
-			fmt.Println(formatDate(element.Published))
-			fmt.Println(element.Title)
-			fmt.Println(" ")
-			fmt.Println(element.Description)
-			return
-		}
+	id = "-"+id
+	s, err := newsSingle(id)
+
+	if err != nil{
+		fmt.Println("Article " + id + " not found.")
+		return
 	}
-	fmt.Println("Article " + id + " not found.")
+
+	fmt.Println(formatDate(s.Date))
+	fmt.Println(s.Title)
+	fmt.Println(" ")
+	fmt.Println(s.Description)
+	return
 }
 
 func formatDate(date string) string {
